@@ -1,0 +1,10 @@
+### Categories
+### Abfrage aller Kategorien sortiert nach Namen
+GET https://localhost:5001/api/categories
+
+### Abfrage Category mit Id
+GET https://localhost:5001/api/categories/4   
+
+### Abfrage aller Filme einer Kategorie sortiert nach Namen
+GET https://localhost:5001/api/categories/4/movies
+
