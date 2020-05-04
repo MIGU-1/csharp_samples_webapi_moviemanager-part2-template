@@ -18,5 +18,6 @@ namespace MovieManager.Core.Contracts
         Task AddRangeAsync(IEnumerable<Category> categories);
         void Delete(Category category);
         Task<bool> ExistsCategoryName(string categoryName, int? categoryId);
+        Task<Category> GetCategoryByNameAsync(string categoryName);
     }
 }

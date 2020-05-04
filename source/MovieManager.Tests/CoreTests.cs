@@ -111,7 +111,7 @@ namespace MovieManager.Tests
         public void MovieValidation_MissingCategoryId_ShouldIndicateMissingCategoryId()
         {
             // Arrange
-            Movie movie = new Movie{Title = "Dummy", Year = 1990};
+            Movie movie = new Movie { Title = "Dummy", Year = 1990 };
 
             // Act
             var (isValid, validationResults) = ValidateObject(movie);

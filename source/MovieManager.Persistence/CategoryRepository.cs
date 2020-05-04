@@ -40,6 +40,7 @@ namespace MovieManager.Persistence
         {
             return await _dbContext
                 .Categories
+                .Include(c => c.Movies)
                 .SingleOrDefaultAsync(c => c.Id == id);
         }
 
@@ -147,5 +148,12 @@ namespace MovieManager.Persistence
             await _dbContext.Categories.AddAsync(category);
         }
 
+        public async Task<Category> GetCategoryByNameAsync(string name)
+        {
+            return await _dbContext
+                .Categories
+                .Include(c => c.Movies)
+                .SingleOrDefaultAsync(c => c.CategoryName.ToLower() == name.ToLower());
+        }
     }
 }
