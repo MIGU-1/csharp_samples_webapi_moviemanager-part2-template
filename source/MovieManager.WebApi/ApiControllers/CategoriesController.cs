@@ -30,28 +30,29 @@ namespace MovieManager.WebApi.ApiControllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<CategoryDto>> GetAllCategories()
+        public async Task<ActionResult<List<CategoryDto>>> GetAllCategories()
         {
-            List<CategoryDto> categories = _unitOfWork
+            var categoriesDb = await _unitOfWork
                         .Categories
-                        .GetAllAsync()
-                        .Result
-                        .Select(c => new CategoryDto
-                        {
-                            Id = c.Id,
-                            Name = c.CategoryName,
-                            Movies = c.Movies
-                                        .Select(m => new MovieDto()
-                                        {
-                                            Id = m.Id,
-                                            Title = m.Title,
-                                            CategoryId = m.CategoryId,
-                                            Year = m.Year,
-                                            Duration = m.Duration
-                                        })
-                                        .ToList()
-                        })
-                        .ToList();
+                        .GetAllAsync();
+
+            List<CategoryDto> categories = categoriesDb
+                                            .Select(c => new CategoryDto
+                                            {
+                                                Id = c.Id,
+                                                Name = c.CategoryName,
+                                                Movies = c.Movies
+                                                            .Select(m => new MovieDto()
+                                                            {
+                                                                Id = m.Id,
+                                                                Title = m.Title,
+                                                                CategoryId = m.CategoryId,
+                                                                Year = m.Year,
+                                                                Duration = m.Duration
+                                                            })
+                                                            .ToList()
+                                            })
+                                            .ToList();
 
             if (categories == null)
             {
