@@ -12,6 +12,9 @@ namespace MovieManager.Core.Validations
     /// </summary>
     public class ClassicMovieMaxDurationAttribute : ValidationAttribute
     {
+        public int IsClassicMovieUntilYear { get; }
+        public int MaxDurationForClassicMovie { get; }
+
         public ClassicMovieMaxDurationAttribute(int isClassicMovieUntilYear, int maxDurationForClassicMovie)
         {
             IsClassicMovieUntilYear = isClassicMovieUntilYear;
@@ -29,9 +32,5 @@ namespace MovieManager.Core.Validations
 
             return ValidationResult.Success;
         }
-
-        public int IsClassicMovieUntilYear { get; }
-        public int MaxDurationForClassicMovie { get; }
-
     }
 }
