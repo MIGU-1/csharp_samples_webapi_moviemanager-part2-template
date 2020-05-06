@@ -31,21 +31,30 @@ namespace MovieManager.WebApi.ApiControllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<MovieWithCategoryDto>> GetAllMovies()
+        public async Task<ActionResult<List<MovieWithCategoryDto>>> GetAllMovies()
         {
-            return Ok(_unitOfWork
+            var moviesInDb = await _unitOfWork
                 .Movies
-                .GetAllAsync()
-                .Result
-                .Select(m => new MovieWithCategoryDto()
-                {
-                    Id = m.Id,
-                    Title = m.Title,
-                    Category = m.Category,
-                    Duration = m.Duration,
-                    Year = m.Year
-                })
-                .ToList());
+                .GetAllAsync();
+
+            List<MovieWithCategoryDto> movies = moviesInDb
+                                    .Select(m => new MovieWithCategoryDto()
+                                    {
+                                        Id = m.Id,
+                                        Title = m.Title,
+                                        Category = m.Category,
+                                        Duration = m.Duration,
+                                        Year = m.Year
+                                    })
+                                    .ToList();
+            if (movies != null)
+            {
+                return Ok(movies);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         /// <summary>
