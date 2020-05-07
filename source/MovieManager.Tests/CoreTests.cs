@@ -105,8 +105,6 @@ namespace MovieManager.Tests
                         WildCardToRegular($"The field {nameof(Movie.Year)} must be between * and *."))));
         }
 
-
-
         [TestMethod]
         public void MovieValidation_MissingCategoryId_ShouldIndicateMissingCategoryId()
         {

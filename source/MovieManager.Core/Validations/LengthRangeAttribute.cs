@@ -6,24 +6,23 @@ using System.Text;
 
 namespace MovieManager.Core.Validations
 {
-    public class MovieYearRangeAttribute : ValidationAttribute
+    public class LengthRangeAttribute : ValidationAttribute
     {
-        public int MinRange { get; }
-        public int MaxRange { get; }
+        public int MinLength { get; set; }
+        public int MaxLength { get; set; }
 
-        public MovieYearRangeAttribute(int minRange, int maxRange)
+        public LengthRangeAttribute(int minLength, int maxLength)
         {
-            MinRange = minRange;
-            MaxRange = maxRange;
+            MinLength = minLength;
+            MaxLength = maxLength;
         }
-
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var movie = (Movie)validationContext.ObjectInstance;
 
-            if (movie.Year < MinRange || movie.Year > MaxRange)
+            if (movie.Duration < MinLength || movie.Year > MaxLength)
             {
-                return new ValidationResult($"The field {nameof(Movie.Year)} must be between * and *.",
+                return new ValidationResult($"The length of {nameof(Movie.Title)} must be between * and *.",
                                               new List<string> { validationContext.MemberName });
             }
 

@@ -26,7 +26,7 @@ namespace MovieManager.Core.Validations
             var movie = (Movie)validationContext.ObjectInstance;
             if (movie.Year <= IsClassicMovieUntilYear && movie.Duration > MaxDurationForClassicMovie)
             {
-                return new ValidationResult($"Classical Movies (until year '{IsClassicMovieUntilYear}') may not last longer than {MaxDurationForClassicMovie} minutes!",
+                return new ValidationResult("Classical Movies (until year '*') may not last longer than * minutes!",
                     new List<string> { validationContext.MemberName });
             }
 
