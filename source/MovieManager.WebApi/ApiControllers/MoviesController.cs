@@ -110,7 +110,7 @@ namespace MovieManager.WebApi.ApiControllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<MovieWithCategoryDto>> GetMovieByIdAsync(int id)
+        public async Task<ActionResult<MovieWithCategoryDto>> GetMovieById(int id)
         {
             Movie movie = await _unitOfWork
                                 .Movies
@@ -215,7 +215,7 @@ namespace MovieManager.WebApi.ApiControllers
         [Route("{id}/category")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<MovieWithCategoryDto>> GetMovieCategoryByIdAsync(int id)
+        public async Task<ActionResult<MovieWithCategoryDto>> GetMovieCategoryById(int id)
         {
             Movie movie = await _unitOfWork
                                 .Movies
